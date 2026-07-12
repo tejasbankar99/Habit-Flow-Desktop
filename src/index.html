@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HabitFlow</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons (development script) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="widget-active">
+
+  <!-- Main App Container -->
+  <div class="app-container" id="app-container">
+    
+    <!-- CUSTOM TITLE BAR -->
+    <header class="title-bar" id="title-bar">
+      <div class="drag-region">
+        <div class="app-logo">
+          <i data-lucide="check-circle-2"></i>
+          <span class="logo-text">HabitFlow</span>
+        </div>
+      </div>
+      <div class="window-controls no-drag">
+        <!-- Always on Top toggle for Widget Mode -->
+        <button id="always-on-top-btn" title="Toggle Always on Top" class="control-btn pin-active">
+          <i data-lucide="pin"></i>
+        </button>
+        <!-- Toggle Mode Button -->
+        <button id="toggle-mode-btn" title="Expand to Dashboard" class="control-btn">
+          <i data-lucide="maximize-2" id="toggle-mode-icon"></i>
+        </button>
+        <!-- Minimize -->
+        <button id="minimize-btn" title="Minimize" class="control-btn">
+          <i data-lucide="minus"></i>
+        </button>
+        <!-- Maximize -->
+        <button id="maximize-window-btn" title="Maximize" class="control-btn">
+          <i data-lucide="square" id="maximize-icon"></i>
+        </button>
+        <!-- Close -->
+        <button id="close-btn" title="Close" class="control-btn close-danger">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="content-wrapper">
+      
+      <!-- ========================================== -->
+      <!-- 1. WIDGET VIEW                             -->
+      <!-- ========================================== -->
+      <section id="widget-view" class="view-panel">
+        <div class="widget-header">
+          <div class="date-info">
+            <h2 id="widget-date-day">Saturday</h2>
+            <p id="widget-date-full">July 11, 2026</p>
+          </div>
+          <button id="widget-settings-btn" class="icon-btn-secondary" title="Habit Settings">
+            <i data-lucide="sliders-horizontal"></i>
+          </button>
+        </div>
+
+        <!-- Today's overall progress ring -->
+        <div class="progress-ring-container">
+          <div class="progress-ring-wrapper">
+            <svg class="progress-ring" width="130" height="130">
+              <defs>
+                <linearGradient id="widget-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="var(--accent-primary)" />
+                  <stop offset="100%" stop-color="var(--accent-secondary)" />
+                </linearGradient>
+              </defs>
+              <!-- Background Ring -->
+              <circle class="progress-ring-bg" stroke="var(--bg-card-border)" stroke-width="12" fill="transparent" r="50" cx="65" cy="65" />
+              <!-- Foreground Progress Ring -->
+              <circle class="progress-ring-fill" id="widget-progress-fill" stroke="url(#widget-grad)" stroke-width="12" stroke-linecap="round" fill="transparent" r="50" cx="65" cy="65" stroke-dasharray="314.16" stroke-dashoffset="314.16" />
+            </svg>
+            <div class="progress-ring-text">
+              <span id="widget-percent">0%</span>
+              <span class="progress-ring-sub">Done</span>
+            </div>
+          </div>
+          <div class="progress-summary">
+            <p><span id="widget-completed-count" class="highlight">0</span> of <span id="widget-total-count">0</span> habits</p>
+            <p class="summary-subtext" id="widget-motivation">Let's get started!</p>
+          </div>
+        </div>
+
+        <!-- Today's Quick List -->
+        <div class="quick-habits-container">
+          <h3>Today's Habits</h3>
+          <div class="quick-habits-list" id="quick-habits-list">
+            <!-- Dynamically populated today's habits -->
+            <div class="empty-state">
+              <i data-lucide="plus-circle"></i>
+              <p>No habits active for today.</p>
+              <button class="btn-primary btn-sm" onclick="app.openSettings()">Add Habit</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Footer -->
+        <div class="widget-footer">
+          <button id="widget-expand-btn" class="btn-primary w-full">
+            <i data-lucide="layout-grid"></i> Open Full Dashboard
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

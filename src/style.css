@@ -1,0 +1,623 @@
+/* ==========================================================================
+   DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+  /* Default: Obsidian Night Theme */
+  --bg-app: rgba(10, 10, 12, 0.85);
+  --bg-card: rgba(22, 22, 26, 0.65);
+  --bg-card-hover: rgba(30, 30, 38, 0.8);
+  --bg-card-border: rgba(255, 255, 255, 0.07);
+  --bg-header: rgba(18, 18, 22, 0.9);
+  
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  
+  --accent-primary: #a78bfa; /* Lavender */
+  --accent-secondary: #60a5fa; /* Blue */
+  --accent-glow: rgba(167, 139, 250, 0.35);
+  
+  --danger: #f87171;
+  --danger-hover: #ef4444;
+  --success: #34d399;
+  
+  /* Week Color Schemes (Soft Glassy Accents for Dark Mode) */
+  --w1-bg: rgba(251, 191, 36, 0.12);   /* Gold */
+  --w1-border: rgba(251, 191, 36, 0.3);
+  --w1-accent: #fbbf24;
+  
+  --w2-bg: rgba(96, 165, 250, 0.12);  /* Blue */
+  --w2-border: rgba(96, 165, 250, 0.3);
+  --w2-accent: #60a5fa;
+  
+  --w3-bg: rgba(248, 113, 113, 0.12); /* Red */
+  --w3-border: rgba(248, 113, 113, 0.3);
+  --w3-accent: #f87171;
+  
+  --w4-bg: rgba(52, 211, 153, 0.12);  /* Green */
+  --w4-border: rgba(52, 211, 153, 0.3);
+  --w4-accent: #34d399;
+  
+  --w5-bg: rgba(192, 132, 252, 0.12); /* Purple */
+  --w5-border: rgba(192, 132, 252, 0.3);
+  --w5-accent: #c084fc;
+}
+
+
+/* ==========================================================================
+   GLOBAL RESET & DEFAULTS
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none; /* Make it feel like native desktop app */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  background: transparent; /* Needed for transparent electron window */
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ==========================================================================
+   APP WINDOW & CONTAINER
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-app);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CUSTOM TITLE BAR */
+.title-bar {
+  height: 40px;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--bg-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.drag-region {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  -webkit-app-region: drag;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-primary);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.app-logo i {
+  width: 16px;
+  height: 16px;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.control-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.control-btn.close-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.control-btn i {
+  width: 14px;
+  height: 14px;
+}
+
+.control-btn.pin-active {
+  color: var(--accent-primary);
+}
+
+.control-btn.pin-inactive {
+  color: var(--text-muted);
+}
+
+/* Content Area */
+.content-wrapper {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.view-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.98);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mode toggles on Body class */
+.widget-active #widget-view {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.dashboard-active #dashboard-view {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+
+/* ==========================================================================
+   1. WIDGET MODE STYLES
+   ========================================================================== */
+#widget-view {
+  padding: 14px;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.date-info h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.date-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Donut Progress Ring */
+.progress-ring-container {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.progress-ring-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  width: 110px;
+  height: 110px;
+}
+
+.progress-ring circle {
+  cx: 55;
+  cy: 55;
+  r: 45;
+}
+
+.progress-ring-bg {
+  stroke-dasharray: 282.7;
+  stroke-dashoffset: 0;
+}
+
+.progress-ring-fill {
+  stroke-dasharray: 282.7;
+  stroke-dashoffset: 282.7;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 4px var(--accent-glow));
+}
+
+.progress-ring-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-ring-text #widget-percent {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.progress-ring-text .progress-ring-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.progress-summary p {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.progress-summary .highlight {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.summary-subtext {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Today's Quick List */
+.quick-habits-container {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-habits-container h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quick-habits-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2px;
+}
+
+/* Habit Card (Widget Mode) */
+.widget-habit-item {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.widget-habit-item:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.widget-habit-item.completed {
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.widget-habit-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.habit-checkbox-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.widget-habit-item.completed .habit-checkbox-btn {
+  background: var(--habit-color, var(--accent-primary));
+  border-color: var(--habit-color, var(--accent-primary));
+  box-shadow: 0 0 8px var(--habit-glow, var(--accent-glow));
+}
+
+.habit-checkbox-btn i {
+  color: white;
+  width: 14px;
+  height: 14px;
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.widget-habit-item.completed .habit-checkbox-btn i {
+  transform: scale(1);
+}
+
+.widget-habit-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.widget-habit-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.widget-habit-item.completed .widget-habit-name {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.widget-habit-streak {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.widget-habit-streak i {
+  width: 10px;
+  height: 10px;
+  color: #f59e0b; /* Orange/Fire */
+}
+
+.widget-habit-stats {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+  color: var(--text-muted);
+  text-align: center;
+  gap: 8px;
+}
+
+.empty-state i {
+  width: 36px;
+  height: 36px;
+  stroke-width: 1.5;
+}
+
+.empty-state p {
+  font-size: 12px;
+}
+
+.widget-footer {
+  margin-top: auto;
+}
+
+
+/* ==========================================================================
+   BUTTONS & GENERAL UTILITIES
+   ========================================================================== */
+.btn-primary, .btn-secondary, .btn-danger, .icon-btn-secondary, .btn-sm {
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: white;
+  padding: 10px 18px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--accent-glow);
+  opacity: 0.95;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  color: var(--text-primary);
+  padding: 10px 18px;
+  font-size: 13px;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-danger {
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: var(--danger);
+  padding: 10px 18px;
+  font-size: 13px;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 11px;
+  border-radius: 6px;
+}
+
+.icon-btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.icon-btn-secondary:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.icon-btn-secondary i {
+  width: 15px;
+  height: 15px;
+}
+
+.icon-btn-danger {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-btn-danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+.icon-btn-danger i {
+  width: 14px;
+  height: 14px;
+}
+
+/* Helpers */
+.w-full { width: 100%; }
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.btn-row {
+  display: flex;
+  gap: 10px;
+}
+.btn-row button {
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   MAXIMIZE WINDOW BUTTON
+   ========================================================================== */
+#maximize-window-btn {
+  display: none; /* Only visible in Dashboard mode */
+}
+
+.dashboard-active #maximize-window-btn {
+  display: flex;
+}
