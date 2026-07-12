@@ -1,0 +1,14 @@
+{
+  "name": "habitflow-desktop",
+  "version": "0.1.0",
+  "description": "Desktop habit tracker widget built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Tejas Bankar",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
