@@ -79,6 +79,9 @@ class HabitTrackerApp {
     
     // Set UI mode
     this.setWindowMode(this.config.isWidgetMode);
+    
+    // Set Theme
+    this.applyTheme(this.config.theme);
 
     // Setup event listeners
     this.setupEventListeners();
@@ -844,6 +847,29 @@ class HabitTrackerApp {
     }
   }
 
+  applyTheme(themeName) {
+    this.config.theme = themeName;
+    
+    // Update body class
+    document.body.className = `${themeName} ${this.config.isWidgetMode ? 'widget-active' : 'dashboard-active'}`;
+    
+    // Update active state on theme cards
+    document.querySelectorAll('.theme-card').forEach(card => {
+      if (card.dataset.theme === themeName) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    // Save to config
+    if (window.electronAPI) {
+      window.electronAPI.saveConfig(this.config);
+    } else {
+      localStorage.setItem('config', JSON.stringify(this.config));
+    }
+  }
+
   // ==========================================================================
   // VIEW CONTROLLERS (MODALS & TABS)
   // ==========================================================================
@@ -1032,6 +1058,13 @@ class HabitTrackerApp {
         this.applyAlwaysOnTopUI(e.target.checked);
       });
     }
+
+    // Theme switching
+    document.querySelectorAll('.theme-card').forEach(card => {
+      card.addEventListener('click', () => {
+        this.applyTheme(card.dataset.theme);
+      });
+    });
 
     // Data Management buttons
     const exportBtn = document.getElementById('export-data-btn');

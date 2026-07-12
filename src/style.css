@@ -1649,3 +1649,178 @@ input[type="number"]:focus {
 .custom-toggle:checked::before {
   transform: translateX(20px);
 }
+
+
+/* ==========================================================================
+   4. THEME OVERRIDES
+   ========================================================================== */
+
+/* 4.1 Glass Light Theme */
+.theme-glass-light {
+  --bg-app: rgba(245, 245, 248, 0.85);
+  --bg-card: rgba(255, 255, 255, 0.65);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --bg-card-border: rgba(0, 0, 0, 0.08);
+  --bg-header: rgba(235, 235, 240, 0.9);
+  
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #3b82f6;
+  --accent-glow: rgba(139, 92, 246, 0.25);
+  
+  /* Week Colors adapted for Light Mode */
+  --w1-bg: rgba(245, 158, 11, 0.1);
+  --w1-border: rgba(245, 158, 11, 0.2);
+  --w1-accent: #d97706;
+  
+  --w2-bg: rgba(59, 130, 246, 0.1);
+  --w2-border: rgba(59, 130, 246, 0.2);
+  --w2-accent: #2563eb;
+  
+  --w3-bg: rgba(239, 68, 68, 0.1);
+  --w3-border: rgba(239, 68, 68, 0.2);
+  --w3-accent: #dc2626;
+  
+  --w4-bg: rgba(16, 185, 129, 0.1);
+  --w4-border: rgba(16, 185, 129, 0.2);
+  --w4-accent: #059669;
+  
+  --w5-bg: rgba(139, 92, 246, 0.1);
+  --w5-border: rgba(139, 92, 246, 0.2);
+  --w5-accent: #7c3aed;
+}
+
+.theme-glass-light .widget-habit-item.completed {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.theme-glass-light .habit-checkbox-btn {
+  border-color: var(--text-muted);
+}
+
+.theme-glass-light .widget-habit-item.completed .habit-checkbox-btn {
+  border-color: var(--habit-color);
+  box-shadow: 0 0 6px var(--habit-glow);
+}
+
+.theme-glass-light .summary-row {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.theme-glass-light .summary-row .sticky-col {
+  background: rgba(235, 235, 240, 0.95);
+  color: var(--text-primary);
+}
+
+/* 4.2 Cyberpunk Neon Theme */
+.theme-cyberpunk {
+  --bg-app: rgba(3, 0, 30, 0.85);
+  --bg-card: rgba(15, 5, 40, 0.65);
+  --bg-card-hover: rgba(25, 10, 60, 0.8);
+  --bg-card-border: rgba(0, 240, 255, 0.2);
+  --bg-header: rgba(10, 0, 25, 0.9);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #00f0ff;
+  --text-muted: #6b7280;
+  
+  --accent-primary: #00f0ff;
+  --accent-secondary: #ff007f;
+  --accent-glow: rgba(0, 240, 255, 0.5);
+  
+  /* High contrast week colors */
+  --w1-bg: rgba(255, 255, 0, 0.1);
+  --w1-border: rgba(255, 255, 0, 0.4);
+  --w1-accent: #ffff00;
+  
+  --w2-bg: rgba(0, 255, 0, 0.1);
+  --w2-border: rgba(0, 255, 0, 0.4);
+  --w2-accent: #00ff00;
+  
+  --w3-bg: rgba(255, 0, 127, 0.1);
+  --w3-border: rgba(255, 0, 127, 0.4);
+  --w3-accent: #ff007f;
+  
+  --w4-bg: rgba(0, 240, 255, 0.1);
+  --w4-border: rgba(0, 240, 255, 0.4);
+  --w4-accent: #00f0ff;
+  
+  --w5-bg: rgba(170, 0, 255, 0.1);
+  --w5-border: rgba(170, 0, 255, 0.4);
+  --w5-accent: #aa00ff;
+}
+
+.theme-cyberpunk .btn-primary {
+  color: #000;
+  font-weight: 800;
+}
+
+/* 4.3 Forest Emerald Theme */
+.theme-emerald {
+  --bg-app: rgba(2, 44, 34, 0.85);
+  --bg-card: rgba(6, 78, 59, 0.5);
+  --bg-card-hover: rgba(6, 95, 70, 0.7);
+  --bg-card-border: rgba(52, 211, 153, 0.15);
+  --bg-header: rgba(2, 44, 34, 0.95);
+  
+  --text-primary: #ecfdf5;
+  --text-secondary: #6ee7b7;
+  --text-muted: #94a3b8;
+  
+  --accent-primary: #34d399;
+  --accent-secondary: #059669;
+  --accent-glow: rgba(52, 211, 153, 0.35);
+  
+  /* Nature inspired week colors */
+  --w1-bg: rgba(250, 204, 21, 0.1);
+  --w1-border: rgba(250, 204, 21, 0.3);
+  --w1-accent: #facc15;
+  
+  --w2-bg: rgba(56, 189, 248, 0.1);
+  --w2-border: rgba(56, 189, 248, 0.3);
+  --w2-accent: #38bdf8;
+  
+  --w3-bg: rgba(251, 146, 60, 0.1);
+  --w3-border: rgba(251, 146, 60, 0.3);
+  --w3-accent: #fb923c;
+  
+  --w4-bg: rgba(167, 243, 208, 0.1);
+  --w4-border: rgba(167, 243, 208, 0.3);
+  --w4-accent: #a7f3d0;
+  
+  --w5-bg: rgba(217, 249, 157, 0.1);
+  --w5-border: rgba(217, 249, 157, 0.3);
+  --w5-accent: #d9f99d;
+}
+
+/* Theme adaptation for heatmap cells */
+.theme-glass-light .heatmap-cell.level-1 { background: rgba(124, 58, 237, 0.12); }
+.theme-glass-light .heatmap-cell.level-2 { background: rgba(124, 58, 237, 0.3); }
+.theme-glass-light .heatmap-cell.level-3 { background: rgba(124, 58, 237, 0.55); }
+.theme-glass-light .heatmap-cell.level-4 { background: var(--accent-primary); }
+
+.theme-cyberpunk .heatmap-cell.level-1 { background: rgba(0, 240, 255, 0.15); border-color: rgba(0, 240, 255, 0.25); }
+.theme-cyberpunk .heatmap-cell.level-2 { background: rgba(0, 240, 255, 0.35); border-color: rgba(0, 240, 255, 0.45); }
+.theme-cyberpunk .heatmap-cell.level-3 { background: rgba(0, 240, 255, 0.6); border-color: rgba(0, 240, 255, 0.7); }
+.theme-cyberpunk .heatmap-cell.level-4 { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-glow); }
+
+.theme-emerald .heatmap-cell.level-1 { background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.25); }
+.theme-emerald .heatmap-cell.level-2 { background: rgba(52, 211, 153, 0.35); border-color: rgba(52, 211, 153, 0.45); }
+.theme-emerald .heatmap-cell.level-3 { background: rgba(52, 211, 153, 0.6); border-color: rgba(52, 211, 153, 0.7); }
+.theme-emerald .heatmap-cell.level-4 { background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-glow); }
+
+.theme-glass-light .heatmap-legend .legend-cell.level-1 { background: rgba(124, 58, 237, 0.12); }
+.theme-glass-light .heatmap-legend .legend-cell.level-2 { background: rgba(124, 58, 237, 0.3); }
+.theme-glass-light .heatmap-legend .legend-cell.level-3 { background: rgba(124, 58, 237, 0.55); }
+.theme-glass-light .heatmap-legend .legend-cell.level-4 { background: var(--accent-primary); }
+
+.theme-glass-light .insight-item {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.04);
+}
+.theme-glass-light .insight-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
