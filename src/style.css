@@ -621,3 +621,436 @@ html, body {
 .dashboard-active #maximize-window-btn {
   display: flex;
 }
+
+
+/* ==========================================================================
+   2. DASHBOARD MODE STYLES
+   ========================================================================== */
+#dashboard-view {
+  padding: 20px;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-left .subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.month-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.month-selector h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  min-width: 160px;
+  text-align: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Grid Spreadsheet Container */
+.grid-card-container {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.spreadsheet-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  border-radius: 8px;
+}
+
+/* Habit Spreadsheet (Table) styling */
+.habit-spreadsheet {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* Table Cells */
+.habit-spreadsheet th,
+.habit-spreadsheet td {
+  padding: 8px;
+  border: 1px solid var(--bg-card-border);
+  min-width: 32px;
+  height: 38px;
+  vertical-align: middle;
+}
+
+/* Headers styling */
+.habit-spreadsheet thead th {
+  background: var(--bg-header);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.week-headers-row th {
+  z-index: 11 !important;
+}
+
+.date-headers-row th {
+  top: 38px !important;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.habit-spreadsheet thead th.habit-col-header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 12 !important;
+  background: var(--bg-header);
+  min-width: 180px;
+  max-width: 220px;
+  text-align: left;
+  padding-left: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.habit-spreadsheet thead th.goal-col-header,
+.habit-spreadsheet thead th.progress-col-header {
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 12 !important;
+  background: var(--bg-header);
+}
+
+.habit-spreadsheet thead th.goal-col-header {
+  right: 120px !important;
+  min-width: 50px;
+}
+
+.habit-spreadsheet thead th.progress-col-header {
+  right: 0 !important;
+  min-width: 120px;
+}
+
+/* Row Sticky columns */
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background: var(--bg-card);
+  z-index: 2;
+  text-align: left;
+  padding-left: 14px;
+  font-weight: 500;
+  border-right: 2px solid var(--bg-card-border);
+}
+
+.habit-row:hover .sticky-col {
+  background: var(--bg-card-hover);
+}
+
+.habit-row-name-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 180px;
+}
+
+.habit-icon-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--habit-color);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--habit-color);
+}
+
+.habit-row-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+/* Right Sticky columns */
+.goal-col {
+  position: sticky;
+  right: 120px;
+  background: var(--bg-card);
+  z-index: 2;
+  border-left: 2px solid var(--bg-card-border);
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+}
+
+.progress-col {
+  position: sticky;
+  right: 0;
+  background: var(--bg-card);
+  z-index: 2;
+  border-left: 1px solid var(--bg-card-border);
+}
+
+.habit-row:hover .goal-col,
+.habit-row:hover .progress-col {
+  background: var(--bg-card-hover);
+}
+
+/* Week Colors (Soft Gradients/Glass fills) */
+.week-1-color { background: var(--w1-bg) !important; color: var(--w1-accent) !important; border-bottom: 2px solid var(--w1-border) !important; }
+.week-2-color { background: var(--w2-bg) !important; color: var(--w2-accent) !important; border-bottom: 2px solid var(--w2-border) !important; }
+.week-3-color { background: var(--w3-bg) !important; color: var(--w3-accent) !important; border-bottom: 2px solid var(--w3-border) !important; }
+.week-4-color { background: var(--w4-bg) !important; color: var(--w4-accent) !important; border-bottom: 2px solid var(--w4-border) !important; }
+.week-5-color { background: var(--w5-bg) !important; color: var(--w5-accent) !important; border-bottom: 2px solid var(--w5-border) !important; }
+
+/* Grid Day cells and checkboxes */
+.day-cell {
+  padding: 0 !important;
+  cursor: pointer;
+}
+
+.grid-checkbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.grid-checkbox:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Checkbox item inside grid */
+.chk-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.grid-checkbox:hover .chk-box {
+  border-color: var(--text-secondary);
+}
+
+.chk-box i {
+  color: white;
+  width: 12px;
+  height: 12px;
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Checked States per Week Colors */
+.grid-checkbox.checked.w1 .chk-box { border-color: var(--w1-accent); background: var(--w1-accent); box-shadow: 0 0 6px rgba(251, 191, 36, 0.4); }
+.grid-checkbox.checked.w2 .chk-box { border-color: var(--w2-accent); background: var(--w2-accent); box-shadow: 0 0 6px rgba(96, 165, 250, 0.4); }
+.grid-checkbox.checked.w3 .chk-box { border-color: var(--w3-accent); background: var(--w3-accent); box-shadow: 0 0 6px rgba(248, 113, 113, 0.4); }
+.grid-checkbox.checked.w4 .chk-box { border-color: var(--w4-accent); background: var(--w4-accent); box-shadow: 0 0 6px rgba(52, 211, 153, 0.4); }
+.grid-checkbox.checked.w5 .chk-box { border-color: var(--w5-accent); background: var(--w5-accent); box-shadow: 0 0 6px rgba(192, 132, 252, 0.4); }
+
+.grid-checkbox.checked .chk-box i {
+  transform: scale(1);
+}
+
+/* Goal cell input style */
+.goal-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+}
+
+.goal-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+/* Progress bar styling */
+.progress-cell-wrapper {
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--habit-color, var(--accent-primary)), var(--accent-secondary, #60a5fa));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Table Footer / Summary Row Styling */
+.summary-row {
+  background: rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+.summary-row .sticky-col {
+  background: rgba(18, 18, 22, 0.95);
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.summary-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+}
+
+/* Done Count color coding */
+.summary-row.habits-completed-row {
+  color: var(--success);
+}
+
+.summary-row.habits-incomplete-row {
+  color: var(--danger);
+}
+
+/* SVG Chart Row in table footer */
+.chart-footer-row td {
+  height: 80px;
+  padding: 4px;
+}
+
+.chart-footer-row .weekly-donut-cell {
+  vertical-align: middle;
+}
+
+.weekly-donut-cell-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mini-donut-svg {
+  transform: rotate(-90deg);
+}
+
+.mini-donut-bg {
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+.mini-donut-fill {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.mini-donut-text {
+  font-size: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+
+/* Bottom Stats Dashboard */
+.dashboard-stats-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.weekly-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.weekly-stat-card:hover {
+  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.stat-chart-wrapper {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stat-info .week-title {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+}
+
+.stat-info .week-detail {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stat-info .week-percent-text {
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
