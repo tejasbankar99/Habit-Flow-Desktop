@@ -2,6 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   getConfig: () => ipcRenderer.invoke('get-config'),
+  saveConfig: (config) => ipcRenderer.send('save-config', config),
   saveHabits: (habitsData) => ipcRenderer.invoke('save-habits', habitsData),
   loadHabits: () => ipcRenderer.invoke('load-habits'),
   minimizeApp: () => ipcRenderer.send('minimize-app'),

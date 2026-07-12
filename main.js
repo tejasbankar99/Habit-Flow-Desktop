@@ -58,6 +58,10 @@ function createWindow() {
   // Load URL
   mainWindow.loadFile(path.join(__dirname, 'src', 'index.html'));
 
+  mainWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+    console.log(`[Browser Console]: ${message} (Line ${line})`);
+  });
+
   // Restore position
   const savedPos = widgetConfig.isWidgetMode ? widgetConfig.widgetPos : widgetConfig.dashboardPos;
   if (savedPos && savedPos.x !== null && savedPos.y !== null) {
@@ -108,6 +112,11 @@ function createWindow() {
 
 // IPC Handlers
 ipcMain.handle('get-config', () => widgetConfig);
+
+ipcMain.on('save-config', (event, configData) => {
+  widgetConfig = { ...widgetConfig, ...configData };
+  saveConfig();
+});
 
 ipcMain.handle('save-habits', (event, habitsData) => {
   try {
