@@ -15,8 +15,9 @@
 
 
 </div>
+## 📸 Preview
 
----
+![HabitFlow Dashboard](assets/Screenshot_habitflow.png)
 
 ## Features
 
