@@ -382,6 +382,9 @@ class HabitTrackerApp {
     // 4. Render Bottom Weekly Stats Dashboard
     this.renderWeeklyStatsSummary(daysInMonth, year, month);
 
+    // 5. Render Analytics & Insights Section
+    this.renderAnalytics(year, month, daysInMonth);
+
     if (window.lucide) window.lucide.createIcons();
   }
 
@@ -541,6 +544,195 @@ class HabitTrackerApp {
 
       container.appendChild(card);
     });
+  }
+
+  // ==========================================================================
+  // ANALYTICS & INSIGHTS RENDERING
+  // ==========================================================================
+  renderAnalytics(year, month, daysInMonth) {
+    if (this.habits.length === 0) return;
+
+    this.renderHeatmap();
+    this.renderTrendChart(year, month, daysInMonth);
+    this.renderInsights();
+  }
+
+  renderHeatmap() {
+    const grid = document.getElementById('heatmap-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    // Last 30 days
+    const daysToShow = 30;
+    const today = new Date(this.today);
+    
+    // We want to show oldest to newest (left to right, top to bottom)
+    const dates = [];
+    for (let i = daysToShow - 1; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      dates.push(d);
+    }
+
+    dates.forEach(date => {
+      const dateStr = this.formatDate(date);
+      let completedCount = 0;
+      let activeCount = 0;
+
+      this.habits.forEach(h => {
+        if (h.activeDays.includes(date.getDay())) activeCount++;
+        if (h.history[dateStr]) completedCount++;
+      });
+
+      let level = 0;
+      if (activeCount > 0) {
+        const percent = completedCount / activeCount;
+        if (percent > 0) level = 1;
+        if (percent >= 0.33) level = 2;
+        if (percent >= 0.66) level = 3;
+        if (percent >= 1) level = 4;
+      }
+
+      const cell = document.createElement('div');
+      cell.className = `heatmap-cell level-${level}`;
+      
+      const displayDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const tooltipText = activeCount === 0 
+        ? `${displayDate}: Rest Day` 
+        : `${displayDate}: ${completedCount}/${activeCount} completed`;
+        
+      cell.setAttribute('data-tooltip', tooltipText);
+      grid.appendChild(cell);
+    });
+  }
+
+  renderTrendChart(year, month, daysInMonth) {
+    const pathFill = document.getElementById('chart-area-path');
+    const pathLine = document.getElementById('chart-line-path');
+    const labelsContainer = document.getElementById('chart-dates-labels');
+    
+    if (!pathFill || !pathLine || !labelsContainer) return;
+
+    const width = 500;
+    const height = 150;
+    
+    // Get daily completions for the month
+    const dailyData = [];
+    let maxCompletions = 1; // Avoid divide by 0
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = this.formatDate(new Date(year, month, day));
+      let count = 0;
+      this.habits.forEach(h => {
+        if (h.history[dateStr]) count++;
+      });
+      dailyData.push(count);
+      if (count > maxCompletions) maxCompletions = count;
+    }
+
+    // Build SVG paths
+    let dLine = '';
+    let dFill = '';
+
+    const stepX = width / Math.max(1, (daysInMonth - 1));
+    
+    dailyData.forEach((val, idx) => {
+      const x = idx * stepX;
+      // Y is inverted (0 is top, 150 is bottom)
+      // Leave some padding at top (20px)
+      const padding = 20;
+      const graphHeight = height - padding;
+      const y = height - ((val / maxCompletions) * graphHeight);
+      
+      if (idx === 0) {
+        dLine += `M ${x},${y} `;
+        dFill += `M ${x},${height} L ${x},${y} `;
+      } else {
+        // Simple bezier curve smoothing
+        const prevX = (idx - 1) * stepX;
+        const prevY = height - ((dailyData[idx - 1] / maxCompletions) * graphHeight);
+        const cpX1 = prevX + (stepX / 2);
+        const cpY1 = prevY;
+        const cpX2 = x - (stepX / 2);
+        const cpY2 = y;
+        
+        dLine += `C ${cpX1},${cpY1} ${cpX2},${cpY2} ${x},${y} `;
+        dFill += `C ${cpX1},${cpY1} ${cpX2},${cpY2} ${x},${y} `;
+      }
+    });
+
+    // Close fill path
+    dFill += `L ${width},${height} Z`;
+
+    pathLine.setAttribute('d', dLine);
+    pathFill.setAttribute('d', dFill);
+
+    // Labels (Start, Middle, End of month)
+    labelsContainer.innerHTML = `
+      <span>1st</span>
+      <span>15th</span>
+      <span>${daysInMonth}th</span>
+    `;
+  }
+
+  renderInsights() {
+    // Total Checked
+    let totalChecked = 0;
+    
+    // Best Streak across all habits
+    let maxStreak = 0;
+
+    // Completions by day of week (0=Sun, 6=Sat)
+    const dayCounts = [0, 0, 0, 0, 0, 0, 0];
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    this.habits.forEach(h => {
+      const hKeys = Object.keys(h.history);
+      totalChecked += hKeys.length;
+      
+      const streak = this.calculateStreak(h);
+      if (streak > maxStreak) maxStreak = streak;
+
+      hKeys.forEach(dateStr => {
+        if (h.history[dateStr] === true) {
+          const d = new Date(dateStr + "T00:00:00"); // Force local timezone parsing
+          dayCounts[d.getDay()]++;
+        }
+      });
+    });
+
+    let bestDayIdx = 0;
+    let bestDayVal = 0;
+    dayCounts.forEach((count, idx) => {
+      if (count > bestDayVal) {
+        bestDayVal = count;
+        bestDayIdx = idx;
+      }
+    });
+
+    // Consistency Rate (All time completed / All time active days since habit creation)
+    // For simplicity of this demo, we calculate for the last 30 days
+    let recentActive = 0;
+    let recentCompleted = 0;
+    const today = new Date(this.today);
+    
+    for (let i = 0; i < 30; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      const dateStr = this.formatDate(d);
+      
+      this.habits.forEach(h => {
+        if (h.activeDays.includes(d.getDay())) recentActive++;
+        if (h.history[dateStr]) recentCompleted++;
+      });
+    }
+
+    const consistencyRate = recentActive > 0 ? Math.round((recentCompleted / recentActive) * 100) : 0;
+
+    document.getElementById('insight-completion-rate').innerText = `${consistencyRate}%`;
+    document.getElementById('insight-total-checked').innerText = totalChecked;
+    document.getElementById('insight-best-streak').innerText = `${maxStreak} days`;
+    document.getElementById('insight-most-consistent').innerText = bestDayVal > 0 ? dayNames[bestDayIdx] : 'N/A';
   }
 
   // ==========================================================================

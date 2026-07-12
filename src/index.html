@@ -180,6 +180,74 @@
           <!-- Dynamically populated stats / summaries per week -->
         </div>
 
+        <!-- Dashboard Analytics & Insights Section -->
+        <div class="dashboard-analytics-section">
+          <!-- Consistency Heatmap Card -->
+          <div class="analytics-card heatmap-card">
+            <h3 class="analytics-card-title"><i data-lucide="calendar"></i> Consistency Heatmap (Last 30 Days)</h3>
+            <div class="heatmap-grid" id="heatmap-grid">
+              <!-- Cells will be generated dynamically -->
+            </div>
+            <div class="heatmap-legend">
+              <span>Less</span>
+              <span class="legend-cell level-0"></span>
+              <span class="legend-cell level-1"></span>
+              <span class="legend-cell level-2"></span>
+              <span class="legend-cell level-3"></span>
+              <span class="legend-cell level-4"></span>
+              <span>More</span>
+            </div>
+          </div>
+
+          <!-- Trend Chart Card -->
+          <div class="analytics-card chart-card">
+            <h3 class="analytics-card-title"><i data-lucide="trending-up"></i> Completion Trend (This Month)</h3>
+            <div class="chart-container">
+              <svg id="trend-line-chart" viewBox="0 0 500 150" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chart-glow-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.4" />
+                    <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Grid Lines -->
+                <line x1="0" y1="37.5" x2="500" y2="37.5" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                <line x1="0" y1="75" x2="500" y2="75" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                <line x1="0" y1="112.5" x2="500" y2="112.5" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                <!-- SVG Chart Paths -->
+                <path id="chart-area-path" d="" fill="url(#chart-glow-grad)" />
+                <path id="chart-line-path" d="" fill="transparent" stroke="var(--accent-primary)" stroke-width="3" stroke-linecap="round" />
+              </svg>
+              <div class="chart-dates-labels" id="chart-dates-labels">
+                <!-- Label dates generated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Insights Card -->
+          <div class="analytics-card insights-card">
+            <h3 class="analytics-card-title"><i data-lucide="sparkles"></i> Insights & Stats</h3>
+            <div class="insights-grid">
+              <div class="insight-item">
+                <div class="insight-value" id="insight-completion-rate">0%</div>
+                <div class="insight-label">Consistency Rate</div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-value" id="insight-total-checked">0</div>
+                <div class="insight-label">Total Checked</div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-value" id="insight-best-streak">0 days</div>
+                <div class="insight-label">Max Current Streak</div>
+              </div>
+              <div class="insight-item">
+                <div class="insight-value" id="insight-most-consistent">N/A</div>
+                <div class="insight-label">Best Day of Week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
 
     </main>
