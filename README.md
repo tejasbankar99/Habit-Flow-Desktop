@@ -1,11 +1,11 @@
+
+<div align="center">
+
 # HabitFlow Desktop
 
 
 > **A beautiful, glassmorphic desktop habit tracker that lives as an always-on-top widget and expands into a full-featured monthly dashboard.**
 
-<div align="center">
-
-#
 <p align="center">
   <img src="https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
@@ -13,11 +13,17 @@
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
 
+</div>
+
+--- 
+
+<div align="center">
+
+## Dashboard Preview
+![HabitFlow Dashboard](assets/Screenshot_habitflow.png)
 
 </div>
-## 📸 Preview
 
-![HabitFlow Dashboard](assets/Screenshot_habitflow.png)
 
 ## Features
 
