@@ -1,13 +1,28 @@
 {
   "name": "habitflow-desktop",
-  "version": "0.1.0",
-  "description": "Desktop habit tracker widget built with Electron",
+  "version": "1.0.0",
+  "description": "Desktop habit tracker widget built with Electron. Features glassmorphism themes, persistent data, and analytics.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "author": "Tejas Bankar",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tejasbankar99/Habit-Flow-Desktop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tejasbankar99/Habit-Flow-Desktop/issues"
+  },
+  "homepage": "https://github.com/tejasbankar99/Habit-Flow-Desktop#readme",
+  "keywords": [
+    "electron",
+    "habit-tracker",
+    "desktop-widget",
+    "glassmorphism",
+    "productivity"
+  ],
   "devDependencies": {
     "electron": "^31.0.0"
   }
