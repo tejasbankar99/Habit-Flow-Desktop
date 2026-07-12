@@ -9,7 +9,7 @@
 
 > **A beautiful, glassmorphic desktop habit tracker that lives as an always-on-top widget and expands into a full-featured monthly dashboard.**
 
-## ✨ Features
+##  Features
 
 - **Widget Mode**: An unobtrusive, frameless widget that floats on your desktop, showing your daily progress and habit checkboxes.
 - **Dashboard Mode**: Expand the widget to reveal a full spreadsheet-style monthly grid, weekly consistency charts, and heatmaps.
@@ -18,7 +18,7 @@
 - **Multiple Themes**: Includes 4 premium design themes: Obsidian Night, Glass Light, Cyberpunk Neon, and Forest Emerald.
 - **Local Privacy**: 100% offline. All habit history is saved locally as a JSON file in your AppData folder. No accounts, no subscriptions, no cloud syncing.
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -42,13 +42,13 @@
    npm start
    ```
 
-### 🪟 Windows Users: Easy Launcher
+###  Windows Users: Easy Launcher
 To create a shortcut on your desktop that launches HabitFlow cleanly without an extra terminal window floating around, run the included PowerShell script:
 ```powershell
 ./create-desktop-shortcut.ps1
 ```
 
-## 🛠️ Tech Stack & Architecture
+##  Tech Stack & Architecture
 
 - **Framework**: Electron (v31)
 - **Frontend**: Vanilla HTML/CSS/JS (Zero framework overhead)
@@ -56,7 +56,7 @@ To create a shortcut on your desktop that launches HabitFlow cleanly without an 
 - **Design System**: Custom CSS variables with glassmorphism effects (`backdrop-filter`)
 - **IPC Architecture**: Secure ContextBridge exposing methods from `main.js` to `preload.js` and `app.js`.
 
-## 📂 Project Structure
+##  Project Structure
 - `main.js`: Electron backend, Window management, OS-level JSON file persistence.
 - `preload.js`: Secure IPC context bridge.
 - `src/`:
@@ -64,7 +64,7 @@ To create a shortcut on your desktop that launches HabitFlow cleanly without an 
   - `style.css`: The complete design system and theme definitions.
   - `app.js`: Core frontend logic, rendering engines, and local state management.
 
-## 📜 License
+##  License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
