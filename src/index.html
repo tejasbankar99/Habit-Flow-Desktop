@@ -184,6 +184,198 @@
 
     </main>
 
+    <!-- ========================================== -->
+    <!-- 3. SETTINGS & CUSTOMIZATION MODAL          -->
+    <!-- ========================================== -->
+    <div id="settings-modal" class="modal-overlay">
+      <div class="modal-card glass-modal">
+        <header class="modal-header">
+          <h2>Customization & Habits</h2>
+          <button id="close-settings-btn" class="icon-btn-secondary">
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+
+        <div class="modal-body">
+          <!-- Navigation Tabs -->
+          <div class="modal-tabs">
+            <button class="tab-btn active" data-tab="tab-habits">
+              <i data-lucide="check-square"></i> Habits List
+            </button>
+            <button class="tab-btn" data-tab="tab-add-new">
+              <i data-lucide="plus-circle"></i> Create Habit
+            </button>
+            <button class="tab-btn" data-tab="tab-appearance">
+              <i data-lucide="palette"></i> Design & Themes
+            </button>
+          </div>
+
+          <!-- Tab Content: Habits List -->
+          <div class="tab-content active" id="tab-habits">
+            <div class="habit-manager-list" id="habit-manager-list">
+              <!-- Habit items for deletion/reordering/editing -->
+            </div>
+          </div>
+
+          <!-- Tab Content: Create Habit -->
+          <div class="tab-content" id="tab-add-new">
+            <form id="create-habit-form" class="modal-form">
+              <div class="form-group">
+                <label for="habit-name-input">Habit Name</label>
+                <input type="text" id="habit-name-input" placeholder="e.g., Drink 8 glasses of water, Play Tennis..." required maxlength="40">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="habit-goal-input">Monthly Goal (Days)</label>
+                  <input type="number" id="habit-goal-input" value="20" min="1" max="31" required>
+                </div>
+                <div class="form-group">
+                  <label for="habit-color-input">Habit Color Accent</label>
+                  <div class="color-picker-grid">
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#a78bfa" checked>
+                      <span class="color-swatch" style="background-color: #a78bfa;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#60a5fa">
+                      <span class="color-swatch" style="background-color: #60a5fa;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#f87171">
+                      <span class="color-swatch" style="background-color: #f87171;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#34d399">
+                      <span class="color-swatch" style="background-color: #34d399;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#fbbf24">
+                      <span class="color-swatch" style="background-color: #fbbf24;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#f472b6">
+                      <span class="color-swatch" style="background-color: #f472b6;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#2dd4bf">
+                      <span class="color-swatch" style="background-color: #2dd4bf;"></span>
+                    </label>
+                    <label class="color-swatch-container">
+                      <input type="radio" name="habit-color" value="#c084fc">
+                      <span class="color-swatch" style="background-color: #c084fc;"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Active Days of the Week</label>
+                <div class="days-of-week-picker">
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="1" checked>
+                    <span>M</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="2" checked>
+                    <span>T</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="3" checked>
+                    <span>W</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="4" checked>
+                    <span>T</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="5" checked>
+                    <span>F</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="6" checked>
+                    <span>S</span>
+                  </label>
+                  <label class="day-picker-btn">
+                    <input type="checkbox" name="active-days" value="0" checked>
+                    <span>S</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary w-full mt-4">
+                <i data-lucide="plus"></i> Add to Habits
+              </button>
+            </form>
+          </div>
+
+          <!-- Tab Content: Design & Themes -->
+          <div class="tab-content" id="tab-appearance">
+            <div class="settings-group">
+              <h3>App Theme</h3>
+              <div class="theme-grid">
+                <button class="theme-card active" data-theme="theme-obsidian">
+                  <div class="theme-preview" style="background: linear-gradient(135deg, #09090b 0%, #18181b 100%);">
+                    <span style="background: #a78bfa;"></span>
+                    <span style="background: #60a5fa;"></span>
+                  </div>
+                  <span>Obsidian Night</span>
+                </button>
+                <button class="theme-card" data-theme="theme-glass-light">
+                  <div class="theme-preview" style="background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%); border: 1px solid #d4d4d8;">
+                    <span style="background: #8b5cf6;"></span>
+                    <span style="background: #3b82f6;"></span>
+                  </div>
+                  <span>Glass Light</span>
+                </button>
+                <button class="theme-card" data-theme="theme-cyberpunk">
+                  <div class="theme-preview" style="background: linear-gradient(135deg, #03001e 0%, #7303c0 50%, #ec38bc 100%);">
+                    <span style="background: #00f0ff;"></span>
+                    <span style="background: #ff007f;"></span>
+                  </div>
+                  <span>Cyberpunk Neon</span>
+                </button>
+                <button class="theme-card" data-theme="theme-emerald">
+                  <div class="theme-preview" style="background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);">
+                    <span style="background: #34d399;"></span>
+                    <span style="background: #059669;"></span>
+                  </div>
+                  <span>Forest Emerald</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="settings-group mt-6">
+              <h3>Widget Settings</h3>
+              <label class="setting-toggle-row">
+                <div class="toggle-info">
+                  <span>Always on Top (Widget Mode)</span>
+                  <p>Keeps the widget floating above other windows</p>
+                </div>
+                <input type="checkbox" id="always-on-top-toggle" checked class="custom-toggle">
+              </label>
+            </div>
+
+            <div class="settings-group mt-6">
+              <h3>Data Management</h3>
+              <div class="btn-row">
+                <button id="export-data-btn" class="btn-secondary">
+                  <i data-lucide="download"></i> Export Data (JSON)
+                </button>
+                <button id="import-data-btn" class="btn-secondary">
+                  <i data-lucide="upload"></i> Import Data
+                </button>
+              </div>
+              <input type="file" id="import-file-input" style="display: none;" accept=".json">
+              <button id="reset-data-btn" class="btn-danger w-full mt-4">
+                <i data-lucide="trash-2"></i> Reset All Data
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="app.js"></script>
