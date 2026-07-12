@@ -1,5 +1,11 @@
 # HabitFlow Desktop
 
+
+> **A beautiful, glassmorphic desktop habit tracker that lives as an always-on-top widget and expands into a full-featured monthly dashboard.**
+
+<div align="center">
+
+#
 <p align="center">
   <img src="https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
@@ -7,65 +13,61 @@
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
 
-> **A beautiful, glassmorphic desktop habit tracker that lives as an always-on-top widget and expands into a full-featured monthly dashboard.**
 
-##  Features
-
-- **Widget Mode**: An unobtrusive, frameless widget that floats on your desktop, showing your daily progress and habit checkboxes.
-- **Dashboard Mode**: Expand the widget to reveal a full spreadsheet-style monthly grid, weekly consistency charts, and heatmaps.
-- **Always on Top**: Pin the widget to your screen so you never forget your habits.
-- **Analytics & Insights**: Automatically tracks completion rates, streaks, and generates beautiful SVG charts.
-- **Multiple Themes**: Includes 4 premium design themes: Obsidian Night, Glass Light, Cyberpunk Neon, and Forest Emerald.
-- **Local Privacy**: 100% offline. All habit history is saved locally as a JSON file in your AppData folder. No accounts, no subscriptions, no cloud syncing.
-
-##  Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/tejasbankar99/Habit-Flow-Desktop.git
-   cd Habit-Flow-Desktop
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the application:
-   ```bash
-   npm start
-   ```
-
-###  Windows Users: Easy Launcher
-To create a shortcut on your desktop that launches HabitFlow cleanly without an extra terminal window floating around, run the included PowerShell script:
-```powershell
-./create-desktop-shortcut.ps1
-```
-
-##  Tech Stack & Architecture
-
-- **Framework**: Electron (v31)
-- **Frontend**: Vanilla HTML/CSS/JS (Zero framework overhead)
-- **Icons**: Lucide Icons
-- **Design System**: Custom CSS variables with glassmorphism effects (`backdrop-filter`)
-- **IPC Architecture**: Secure ContextBridge exposing methods from `main.js` to `preload.js` and `app.js`.
-
-##  Project Structure
-- `main.js`: Electron backend, Window management, OS-level JSON file persistence.
-- `preload.js`: Secure IPC context bridge.
-- `src/`:
-  - `index.html`: The monolithic view containing Widget, Dashboard, and Modals.
-  - `style.css`: The complete design system and theme definitions.
-  - `app.js`: Core frontend logic, rendering engines, and local state management.
-
-##  License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+</div>
 
 ---
-*Created by [Tejas Bankar](https://github.com/tejasbankar99)*
+
+## Features
+
+-  Always-on-top desktop widget
+-  Spreadsheet-style monthly dashboard
+-  Habit analytics & streak tracking
+-  Multiple built-in themes
+-  100% offline with local JSON storage
+-  Fast, lightweight, and responsive
+
+---
+
+
+##  Tech Stack
+
+- Electron.js
+- HTML5
+- CSS3
+- JavaScript
+- JSON Storage
+
+---
+
+##  Installation
+
+```bash
+git clone https://github.com/tejasbankar99/HabitFlow-Desktop.git
+
+cd HabitFlow-Desktop
+
+npm install
+
+npm start
+```
+
+---
+
+##  Why HabitFlow?
+
+HabitFlow was created because most habit trackers are either mobile apps or spreadsheets. I wanted a desktop-first experience that stays visible while working and makes tracking habits simple without relying on cloud services.
+
+---
+
+##  License
+
+MIT License
+
+---
+
+<div align="center">
+
+Made with ❤️ by **Tejas Bankar**
+
+</div>
