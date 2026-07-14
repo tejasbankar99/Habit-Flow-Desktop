@@ -47,19 +47,6 @@
 
 ---
 
-##  Installation
-
-```bash
-git clone https://github.com/tejasbankar99/HabitFlow-Desktop.git
-
-cd HabitFlow-Desktop
-
-npm install
-
-npm start
-```
-
----
 
 ##  Why HabitFlow?
 
